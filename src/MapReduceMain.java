@@ -2,7 +2,7 @@ import main_program.Analyze;
 
 public class MapReduceMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 
 		/* Main function of the program
 		 * 
@@ -12,10 +12,11 @@ public class MapReduceMain {
 		
 		String freqFile = "src/data/bible.txt";
 		
-		int nbThread = 3;
-		
+		int nbThread = 6;
 		
 		new Analyze(freqFile, nbThread);
+		
+		
 	}
 
 }

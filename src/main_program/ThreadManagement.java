@@ -6,9 +6,13 @@ import java.util.List;
 public class ThreadManagement implements Runnable {
 
 	private List<String> map;
+	private Reducer reducer;
+	private int nbThread;
 	
-	public ThreadManagement(List<String> map) {
+	public ThreadManagement(List<String> map, Reducer reducer, int nbThread) {
 		this.map = map;
+		this.reducer = reducer;
+		this.nbThread = nbThread;
 	}
 
 	@Override
@@ -24,8 +28,24 @@ public class ThreadManagement implements Runnable {
 			}
 		}
 		
-		System.out.println(count);
+		this.reducer.receiveProcessing(count);
 		
+	}
+
+	public Reducer getReducer() {
+		return reducer;
+	}
+
+	public void setReducer(Reducer reducer) {
+		this.reducer = reducer;
+	}
+
+	public int getNbThread() {
+		return nbThread;
+	}
+
+	public void setNbThread(int nbThread) {
+		this.nbThread = nbThread;
 	} 
 	
 }
