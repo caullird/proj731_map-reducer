@@ -3,13 +3,13 @@ package main_program;
 import java.util.HashMap;
 import java.util.List;
 
-public class ThreadManagement implements Runnable {
+public class ThreadMapManagement implements Runnable {
 
 	private List<String> map;
 	private Reducer reducer;
 	private int nbThread;
 	
-	public ThreadManagement(List<String> map, Reducer reducer, int nbThread) {
+	public ThreadMapManagement(List<String> map, Reducer reducer, int nbThread) {
 		this.map = map;
 		this.reducer = reducer;
 		this.nbThread = nbThread;
@@ -28,7 +28,11 @@ public class ThreadManagement implements Runnable {
 			}
 		}
 		
-		this.reducer.receiveProcessing(count);
+		try {
+			this.reducer.receiveProcessing(count);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

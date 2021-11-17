@@ -2,7 +2,8 @@ package main_program;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class Reducer {
 	
@@ -10,42 +11,50 @@ public class Reducer {
 	
 	private int nbThread;
 	
-	private int nbArrived;
+	private int nbReceived;
 	
 	public Reducer(int nbThread) {
 		super();
 		this.itemsList = new ArrayList<HashMap<String, Integer>>();
 		this.nbThread = nbThread;
-		this.nbArrived = 0;
+		this.nbReceived = 0;
+	}
+	
+	public void generateTree() throws InterruptedException {
+		
+		while(this.itemsList.size() > 1 ) {
+			HashMap<String, Integer> FirstElement = this.getFirstElement(this.itemsList.get(0));
+			HashMap<String, Integer> SecondElement = this.getFirstElement(this.itemsList.get(0));
+
+			new Thread(new ThreadReduceManagement(FirstElement, SecondElement, this)).start();
+			
+			synchronized(this) { wait(); }
+		}
+		
+		System.out.println(this.itemsList);
+		
+
+	}
+	
+	public HashMap<String, Integer> getFirstElement(HashMap<String, Integer> hashMap) {
+		
+		if(this.itemsList.remove(hashMap)) {
+			return hashMap;	
+		}
+		
+		return null;
 	}
 
-	public void receiveProcessing(HashMap<String, Integer> count) {
+	public void receiveProcessing(HashMap<String, Integer> count) throws InterruptedException {
+		
 		this.itemsList.add(count);
-		System.out.println("Un nouveau thread est arrivée");
-		this.nbArrived++;
-		if(this.nbArrived == this.nbThread) {
-			this.reducer();
+		this.nbReceived++;
+		
+		if(this.nbReceived == this.nbThread) {
+			this.generateTree();
 		}
 	}
-	
-	public void reducer() {
-		
-		HashMap<String, Integer> count = new HashMap<>();
-		
-		for(HashMap<String, Integer> map : this.itemsList) {
-			
-			//for(String word : map) {
-				//if(count.containsKey(word)) {
-					//count.put(word, count.get(word)+1);
-				//}else {
-					//count.put(word,1);
-				//}
-			//}
-			System.out.println(map.keySet());
-			System.out.println(map.values());
-		}
-	}
-	
+
 	public ArrayList<HashMap<String, Integer>> readHashMaps() {
 		return this.itemsList;
 	}
@@ -58,12 +67,12 @@ public class Reducer {
 		this.nbThread = nbThread;
 	}
 
-	public int getNbArrived() {
-		return nbArrived;
-	}
-
-	public void setNbArrived(int nbArrived) {
-		this.nbArrived = nbArrived;
+	public void addReduceElement(HashMap<String, Integer> count) {
+		this.itemsList.add(count);
+		
+		synchronized(this) {
+			notify();
+		}
 	}
 
 	

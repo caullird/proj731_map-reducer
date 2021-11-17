@@ -3,12 +3,17 @@ package config;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class ReduceFile {
 	
 	private File file;
+	
 	private String content;
 	
+	private String result;
+	
+	private Logger logger;
 	
 	/* Constructor of the File Class
 	 * 
@@ -22,9 +27,10 @@ public class ReduceFile {
 	
 	public ReduceFile() {}
 	
-	public ReduceFile(String link) {
+	public ReduceFile(String link, Logger unLogger) {
 		this.setFile(new File(link));
 		this.setContent(this.getContentFile());
+		this.logger = unLogger;
 	}
 	
 	public String getContentFile() {
@@ -45,12 +51,40 @@ public class ReduceFile {
 				result += myReader.nextLine();
 			}
 			myReader.close();
+			this.result = result;
 			return result;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		
 		return null;
+	}
+	
+	public int getNbThread() {
+		
+		int NbThread = (int) Math.ceil(Math.log(this.getNbWord()));
+		
+		if(NbThread <= 0) { return 1; }
+		
+		if(NbThread >= 7) { return 7; }
+		
+		return NbThread;
+	}
+	
+	public int getNbWord() {
+		
+		int NbWords =  new StringTokenizer(this.result," ").countTokens();  
+		
+		this.logger.addInfo(NbWords + " mots dans le document");
+		
+		if(NbWords <= 0) {
+			this.logger.addError(NbWords + " mots dans le document");
+		}else {
+	        return new StringTokenizer(this.result," ").countTokens(); 
+		}
+		
+		return 0;
+		 
 	}
 	
 	/* Getters & Setters

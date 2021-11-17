@@ -10,13 +10,6 @@ public class MapReduceMain {
 		 * 
 		 */
 		
-		String freqFile = "src/data/bible.txt";
-		
-		int nbThread = 6;
-		
-		new Analyze(freqFile, nbThread);
-		
-		
+		new Analyze();
 	}
-
 }

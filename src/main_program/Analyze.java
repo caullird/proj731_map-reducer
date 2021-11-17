@@ -2,17 +2,24 @@ package main_program;
 
 import java.util.List;
 
+import config.Logger;
 import config.ReduceFile;
 
 public class Analyze {
 
-	public Analyze(String freqFile, int nbThread){
+	public Analyze(){
 		
-		ReduceFile stringBook = new ReduceFile(freqFile);
+		String freqFile = "src/data/big.txt";
 		
-		List<List<String>> maps = new MapGenerator(stringBook,nbThread).GenerateMaps();
+		Logger logger = new Logger();
 		
-		ThreadGenerator threads = new ThreadGenerator(maps,nbThread).generateThread();
+		ReduceFile stringBook = new ReduceFile(freqFile, logger);
+		
+		int nbThread = stringBook.getNbThread();
+		
+		List<List<String>> maps = new MapGenerator(stringBook,nbThread, logger).GenerateMaps();
+		
+		new ThreadGenerator(maps,nbThread).generateThread();
 
 	}
 

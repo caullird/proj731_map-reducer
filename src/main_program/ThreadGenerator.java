@@ -18,7 +18,7 @@ public class ThreadGenerator {
 	
 	public ThreadGenerator generateThread(){
 		for(List<String> map : this.getMaps()) {
-			new Thread(new ThreadManagement(map, this.reducer, this.getNbThread())).start();
+			new Thread(new ThreadMapManagement(map, this.reducer, this.getNbThread())).start();
 		}
 		
 		return null;
