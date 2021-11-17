@@ -75,7 +75,7 @@ public class ReduceFile {
 		
 		int NbWords =  new StringTokenizer(this.result," ").countTokens();  
 		
-		this.logger.addInfo(NbWords + " mots dans le document");
+		//this.logger.addInfo(NbWords + " mots dans le document");
 		
 		if(NbWords <= 0) {
 			this.logger.addError(NbWords + " mots dans le document");

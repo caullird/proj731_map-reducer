@@ -2,8 +2,6 @@ package main_program;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class Reducer {
 	
@@ -13,18 +11,21 @@ public class Reducer {
 	
 	private int nbReceived;
 	
+	private boolean alreadyRestart;
+	
 	public Reducer(int nbThread) {
 		super();
 		this.itemsList = new ArrayList<HashMap<String, Integer>>();
 		this.nbThread = nbThread;
 		this.nbReceived = 0;
+		this.alreadyRestart = false;
 	}
 	
 	public void generateTree() throws InterruptedException {
 		
 		while(this.itemsList.size() > 1 ) {
-			HashMap<String, Integer> FirstElement = this.getFirstElement(this.itemsList.get(0));
-			HashMap<String, Integer> SecondElement = this.getFirstElement(this.itemsList.get(0));
+			HashMap<String, Integer> FirstElement = this.getAndDeleteFirstElement(this.itemsList.get(0));
+			HashMap<String, Integer> SecondElement = this.getAndDeleteFirstElement(this.itemsList.get(0));
 
 			new Thread(new ThreadReduceManagement(FirstElement, SecondElement, this)).start();
 			
@@ -36,12 +37,8 @@ public class Reducer {
 
 	}
 	
-	public HashMap<String, Integer> getFirstElement(HashMap<String, Integer> hashMap) {
-		
-		if(this.itemsList.remove(hashMap)) {
-			return hashMap;	
-		}
-		
+	public HashMap<String, Integer> getAndDeleteFirstElement(HashMap<String, Integer> hashMap) {
+		if(this.itemsList.remove(hashMap)) { return hashMap; }
 		return null;
 	}
 
@@ -52,7 +49,16 @@ public class Reducer {
 		
 		if((this.nbReceived == this.nbThread) && (this.itemsList.size() == this.nbThread)) {
 			this.generateTree();
+			return;
+		}else if((this.nbReceived > this.itemsList.size()) && !this.alreadyRestart) {
+			this.restart();
+			return;
 		}
+	}
+	
+	public Analyze restart() {
+		this.alreadyRestart = true;
+		return new Analyze();
 	}
 
 	public ArrayList<HashMap<String, Integer>> readHashMaps() {

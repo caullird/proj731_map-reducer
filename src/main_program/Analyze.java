@@ -9,7 +9,7 @@ public class Analyze {
 
 	public Analyze(){
 		
-		String freqFile = "src/data/big.txt";
+		String freqFile = "src/data/bible.txt";
 		
 		Logger logger = new Logger();
 		
