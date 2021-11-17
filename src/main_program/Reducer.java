@@ -50,7 +50,7 @@ public class Reducer {
 		this.itemsList.add(count);
 		this.nbReceived++;
 		
-		if(this.nbReceived == this.nbThread) {
+		if((this.nbReceived == this.nbThread) && (this.itemsList.size() == this.nbThread)) {
 			this.generateTree();
 		}
 	}
