@@ -17,7 +17,7 @@ public class ThreadMapManagement implements Runnable {
 
 	@Override
 	public void run() {
-		
+		System.out.println("Un thread to map");
 		HashMap<String, Integer> count = new HashMap<>();
 		
 		for(String word : this.map) {
