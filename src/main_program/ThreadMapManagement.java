@@ -6,8 +6,16 @@ import java.util.List;
 public class ThreadMapManagement implements Runnable {
 
 	private List<String> map;
+	
 	private Reducer reducer;
+	
 	private int nbThread;
+	
+	/* Constructor of the ThreadMapManagement Class
+	 * 
+	 * Create ThreadMapManagement Object 
+	 * 
+	 */
 	
 	public ThreadMapManagement(List<String> map, Reducer reducer, int nbThread) {
 		this.map = map;
@@ -17,6 +25,12 @@ public class ThreadMapManagement implements Runnable {
 
 	@Override
 	public void run() {
+		
+		/* run() function
+		 * 
+		 * Allows to execute the program for each thread
+		 */
+		
 		HashMap<String, Integer> count = new HashMap<>();
 		
 		for(String word : this.map) {
@@ -34,21 +48,30 @@ public class ThreadMapManagement implements Runnable {
 		}
 		
 	}
+	
+	/* Getters & Setters
+	 * 
+	 * 
+	 * Function allowing the modification and recovery of the elements of the object
+	 * 
+    	 * Getters 
+    	 * ----------
+     	 *  - getReducer() : is used to retrieve the reducer element
+	 *  - getNbThread() : is used to retrieve the number of thread 
+	 *  
+	 * Setters 
+	 * ----------
+	 *  - setReducer() : is used to modify the reducer element 
+	 *  - setNbThread() : is used to modify the number of thread 
+	 * 
+	 */
 
-	public Reducer getReducer() {
-		return reducer;
-	}
+	public Reducer getReducer() { return reducer; }
 
-	public void setReducer(Reducer reducer) {
-		this.reducer = reducer;
-	}
+	public void setReducer(Reducer reducer) { this.reducer = reducer; }
 
-	public int getNbThread() {
-		return nbThread;
-	}
+	public int getNbThread() { return nbThread; }
 
-	public void setNbThread(int nbThread) {
-		this.nbThread = nbThread;
-	} 
+	public void setNbThread(int nbThread) { this.nbThread = nbThread; } 
 	
 }
