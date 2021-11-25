@@ -162,11 +162,11 @@ public class ReduceFile {
 	 *  
 	 * Setters 
 	 * ----------
-	 *  - getFile() : is used to modify the "file" element 
-	 *  - getName() : is used to modify the fileName element
-	 *  - getContent() : is used to modify the file content element
-	 *  - getNbThreadMax() : is used to modify the default value
-	 *  - getPath() : is used to modify the path of the project
+	 *  - setFile() : is used to modify the "file" element 
+	 *  - setName() : is used to modify the fileName element
+	 *  - setContent() : is used to modify the file content element
+	 *  - setNbThreadMax() : is used to modify the default value
+	 *  - setPath() : is used to modify the path of the project
 	 * 
 	 */
 	
