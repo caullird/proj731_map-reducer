@@ -10,6 +10,12 @@ public class ThreadReduceManagement implements Runnable {
 	
 	private Reducer reducer;
 	
+	/* Constructor of the ThreadReduceManagement Class
+	 * 
+	 * Create ThreadReduceManagement Object 
+	 * 
+	 */
+	
 	public ThreadReduceManagement(HashMap<String, Integer> unFirstElement, HashMap<String, Integer> unSecondElement, Reducer unReducer) {
 		this.itemsList = new ArrayList<HashMap<String, Integer>>();
 		this.reducer = unReducer;
@@ -18,6 +24,11 @@ public class ThreadReduceManagement implements Runnable {
 
 	@Override
 	public void run() {
+		
+		/* run() function
+		 * 
+		 * Allows to execute the program for each thread
+		 */
 
 		HashMap<String, Integer> count = new HashMap<>();
 	
@@ -37,6 +48,12 @@ public class ThreadReduceManagement implements Runnable {
 	}
 	
 	public void addElements(HashMap<String, Integer> unFirstElement, HashMap<String, Integer> unSecondElement) {
+	
+		/* addElements() function
+		 * 
+		 * Allows to add element in the list
+		 */
+		
 		this.itemsList.add(unFirstElement);
 		this.itemsList.add(unSecondElement);
 	}
