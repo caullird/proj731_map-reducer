@@ -51,7 +51,6 @@ public class ReduceFile {
 		 * 
 		 * Allows you to retrieve the contents of a file 
 		 * 
-		 * @Override : getContentFile() in FileInterface
 		 * 
 		 */
 
