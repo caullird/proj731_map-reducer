@@ -3,8 +3,6 @@ package main_program;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import config.Logger;
 import config.ReduceFile;
 
 public class MapGenerator {
@@ -13,18 +11,16 @@ public class MapGenerator {
 	
 	private int NbThread;
 	
-	private Logger logger;
 
-	public MapGenerator(ReduceFile stringBook, int NbThread, Logger unLogger) {
+	public MapGenerator(ReduceFile stringBook, int NbThread) {
 		this.setFullText(stringBook.getContentFile());
 		this.setNbThread(NbThread);
-		this.logger = unLogger;
 	}
 
 	public List<List<String>> GenerateMaps() {
 				
 				
-		List<String> words = Arrays.asList(this.fullText.split(" "));
+		List<String> words = Arrays.asList(this.fullText.split("\\P{L}+"));
 		List<List<String>> lists = new ArrayList<List<String>>();
 		
 		

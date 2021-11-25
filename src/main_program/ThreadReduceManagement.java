@@ -6,10 +6,6 @@ import java.util.Map;
 
 public class ThreadReduceManagement implements Runnable {
 
-	private HashMap<String, Integer> firstElement;
-	
-	private HashMap<String, Integer> secondElement;
-	
 	private ArrayList<HashMap<String, Integer>> itemsList;
 	
 	private Reducer reducer;

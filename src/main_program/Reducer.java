@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import config.ReduceFile;
+
 public class Reducer {
 	
 	private ArrayList<HashMap<String, Integer>> itemsList;
@@ -14,19 +16,16 @@ public class Reducer {
 	
 	private int nbReceived;
 	
-	private boolean alreadyRestart;
-	
 	public Reducer(int nbThread) {
 		super();
 		this.itemsList = new ArrayList<HashMap<String, Integer>>();
 		this.nbThread = nbThread;
 		this.nbReceived = 0;
-		this.alreadyRestart = false;
 	}
 	
 	public void generateTree() throws InterruptedException {
 		
-		while(this.itemsList.size() > 1 && !this.alreadyRestart) {
+		while(this.itemsList.size() > 1) {
 			HashMap<String, Integer> FirstElement = this.getAndDeleteFirstElement(this.itemsList.get(0));
 			HashMap<String, Integer> SecondElement = this.getAndDeleteFirstElement(this.itemsList.get(0));
 
@@ -46,11 +45,13 @@ public class Reducer {
 		    .stream()
 		    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) 
 		    .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
+		
+		
+		new ReduceFile().writeResult(reverseSortedMap.toString());
+
 		 
 		System.out.println("Result   : " + reverseSortedMap);
 	}
-	
-	
 	
 	public HashMap<String, Integer> getAndDeleteFirstElement(HashMap<String, Integer> hashMap) {
 		if(this.itemsList.remove(hashMap)) { return hashMap; }
@@ -63,16 +64,10 @@ public class Reducer {
 		this.nbReceived++;
 		
 		if((this.nbReceived == this.nbThread) && (this.itemsList.size() == this.nbThread)) {
-			this.generateTree(); return;
-		}else if((this.nbReceived > this.itemsList.size()) && !this.alreadyRestart) {
-			this.restart(); return;
+			this.generateTree();
 		}
 	}
 	
-	public Analyze restart() {
-		this.alreadyRestart = true;
-		return new Analyze();
-	}
 
 	public ArrayList<HashMap<String, Integer>> readHashMaps() {
 		return this.itemsList;

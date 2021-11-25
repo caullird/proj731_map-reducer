@@ -1,21 +1,29 @@
 package config;
 
+import java.awt.Desktop;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.StringTokenizer;
 
 public class ReduceFile {
 	
 	private File file;
 	
+	private String link;
+	
 	private String content;
 	
 	private String result;
 	
-	private Logger logger;
-	
 	private int nbThreadMax;
+	
+	private String path;
 	
 	/* Constructor of the File Class
 	 * 
@@ -27,12 +35,14 @@ public class ReduceFile {
 	 * 
 	 */
 	
-
+	public ReduceFile() {}
 	
-	public ReduceFile(String link, Logger unLogger, int nbThreadMax) {
+	public ReduceFile(String link, int nbThreadMax) {
 		this.setFile(new File(link));
+		this.link = link;
 		this.setContent(this.getContentFile());
-		this.logger = unLogger;
+		this.nbThreadMax = nbThreadMax;
+		this.setPath();
 	}
 	
 	public String getContentFile() {
@@ -45,21 +55,17 @@ public class ReduceFile {
 		 * 
 		 */
 
-		String result = "";
-		Scanner myReader;
+		byte[] content = null;
 		try {
-			myReader = new Scanner(this.file);
-			while(myReader.hasNextLine()) {
-				result += myReader.nextLine();
-			}
-			myReader.close();
-			this.result = result;
-			return result;
-		} catch (FileNotFoundException e) {
+			content = Files.readAllBytes(Paths.get("src/data/" + this.link));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		this.result = new String(content);
+		
+		return new String(content);
+		
 	}
 	
 	public int getNbThread() {
@@ -78,13 +84,41 @@ public class ReduceFile {
 		int NbWords =  new StringTokenizer(this.result," ").countTokens();  
 		
 		if(NbWords <= 0) {
-			this.logger.addError(NbWords + " mots dans le document");
+			System.out.println("Pas de mots dans le document");
 		}else {
-	        return new StringTokenizer(this.result," ").countTokens(); 
+	        return NbWords; 
 		}
 		
 		return 0;
 		 
+	}
+	
+	public void writeResult(String result) {
+		
+		this.setPath();
+		
+		try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.path + "\\src\\data\\result.txt"), "utf-8"))) { 
+			writer.write(result);
+			
+			this.openResult();
+			
+		} catch (IOException e) {
+			e.printStackTrace(); 
+		}
+	}
+	
+	public void openResult() {
+		
+		File file = new File(this.path + "\\src\\data\\result.txt"); 
+		
+		Desktop desktop = Desktop.getDesktop();  
+		if(file.exists()) {        
+			try {
+				desktop.open(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}             
+		}  
 	}
 	
 	/* Getters & Setters
@@ -118,5 +152,18 @@ public class ReduceFile {
 	public int getNbThreadMax() { return nbThreadMax; }
 
 	public void setNbThreadMax(int nbThreadMax) { this.nbThreadMax = nbThreadMax; }
+
+	public String getPath() { return path; }
+
+	public void setPath() {
+
+		try {
+			this.path = new java.io.File(".").getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 }
