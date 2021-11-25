@@ -9,11 +9,13 @@ public class Analyze {
 
 	public Analyze(){
 		
-		String freqFile = "src/data/big.txt";
+		int nbThreadMax = 7;
+		
+		String freqFile = "src/data/bible.txt";
 		
 		Logger logger = new Logger();
 		
-		ReduceFile stringBook = new ReduceFile(freqFile, logger);
+		ReduceFile stringBook = new ReduceFile(freqFile, logger, nbThreadMax);
 		
 		int nbThread = stringBook.getNbThread();
 		

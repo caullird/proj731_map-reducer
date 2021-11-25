@@ -22,8 +22,7 @@ public class ThreadReduceManagement implements Runnable {
 
 	@Override
 	public void run() {
-		
-		System.out.println("Un thread de plus pour le reduce");
+
 		HashMap<String, Integer> count = new HashMap<>();
 	
 		for(HashMap<String, Integer> maps : this.itemsList) {
@@ -37,8 +36,6 @@ public class ThreadReduceManagement implements Runnable {
 					}
 			}
 		}	
-		
-		//System.out.println("Fin du thread");
 		
 		this.reducer.addReduceElement(count);
 	}

@@ -15,6 +15,8 @@ public class ReduceFile {
 	
 	private Logger logger;
 	
+	private int nbThreadMax;
+	
 	/* Constructor of the File Class
 	 * 
 	 * Create File Object 
@@ -25,9 +27,9 @@ public class ReduceFile {
 	 * 
 	 */
 	
-	public ReduceFile() {}
+
 	
-	public ReduceFile(String link, Logger unLogger) {
+	public ReduceFile(String link, Logger unLogger, int nbThreadMax) {
 		this.setFile(new File(link));
 		this.setContent(this.getContentFile());
 		this.logger = unLogger;
@@ -66,7 +68,7 @@ public class ReduceFile {
 		
 		if(NbThread <= 0) { return 1; }
 		
-		if(NbThread >= 7) { return 7; }
+		if(NbThread >= this.getNbThreadMax() ) { return this.getNbThreadMax(); }
 		
 		return NbThread;
 	}
@@ -74,8 +76,6 @@ public class ReduceFile {
 	public int getNbWord() {
 		
 		int NbWords =  new StringTokenizer(this.result," ").countTokens();  
-		
-		//this.logger.addInfo(NbWords + " mots dans le document");
 		
 		if(NbWords <= 0) {
 			this.logger.addError(NbWords + " mots dans le document");
@@ -114,6 +114,9 @@ public class ReduceFile {
 	public String getContent() { return content; }
 
 	public void setContent(String content) { this.content = content; }
-	
 
+	public int getNbThreadMax() { return nbThreadMax; }
+
+	public void setNbThreadMax(int nbThreadMax) { this.nbThreadMax = nbThreadMax; }
+	
 }
