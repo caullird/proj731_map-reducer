@@ -5,11 +5,18 @@ import java.util.Arrays;
 import java.util.List;
 import config.ReduceFile;
 
+
 public class MapGenerator {
 
 	private String fullText;
 	
 	private int NbThread;
+	
+	/* Constructor of the MapGenerator
+	 * 
+	 * Create MapGenerator Object 
+	 * 
+	 */
 	
 
 	public MapGenerator(ReduceFile stringBook, int NbThread) {
@@ -18,7 +25,12 @@ public class MapGenerator {
 	}
 
 	public List<List<String>> GenerateMaps() {
-				
+		
+		/* GenerateMaps() function
+		 * 
+		 * Allows you to generate the maps
+		 * 
+		 */		
 				
 		List<String> words = Arrays.asList(this.fullText.split("\\P{L}+"));
 		List<List<String>> lists = new ArrayList<List<String>>();
@@ -49,21 +61,31 @@ public class MapGenerator {
 		return lists;
 	}
 	
+	/* Getters & Setters
+	 * 
+	 * 
+	 * Function allowing the modification and recovery of the elements of the object
+	 * 
+    	 * Getters 
+    	 * ----------
+     	 *  - getFullText() : is used to retrieve the full text element 
+	 *  - getNbThread() : is used to retrieve the number of threads
+	 *  
+	 * Setters 
+	 * ----------
+	 *  - setFullText() : is used to modify the full text element 
+	 *  - setNbThread() : is used to modify the number of threads
+	 * 
+	 */
 	
-	public String getFullText() {
-		return fullText;
-	}
+	
+	public String getFullText() { return fullText; }
 
-	public void setFullText(String string) {
-		this.fullText = string;
-	}
+	public void setFullText(String string) { this.fullText = string; }
 
-	public int getNbThread() {
-		return NbThread;
-	}
+	public int getNbThread() { return NbThread; }
 
-	public void setNbThread(int nbThread) {
-		NbThread = nbThread;
-	}
+	public void setNbThread(int nbThread) { NbThread = nbThread;
+					      }
 
 }
