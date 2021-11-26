@@ -14,6 +14,11 @@ Le principe de création de map et de reducer se base sur le concept du multithr
 4. Génrer la réception et l'attente de la récéption des threads 
 5. Générer des threads pour le map reduce
 
+## Déroulement de notre programme 
+
+![image](https://user-images.githubusercontent.com/54810120/143560608-373ad9fe-a0e8-44c9-a0c7-33b8ce053ba3.png)
+
+![image](https://user-images.githubusercontent.com/54810120/143560676-0431fc38-bb88-4dc7-84b3-3bf0c236e1aa.png)
 
 ## Comment installer le programme ?
 
