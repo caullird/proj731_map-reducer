@@ -11,14 +11,7 @@ public class Analyze {
 	 * 
 	 */
 
-	public Analyze(){
-		
-		
-		// Allows the user to choose the maximum number of threads
-		int nbThreadMax = 7;
-		
-		// Allows the user to choose the file to be processed
-		String freqFile = "big.txt";
+	public Analyze(String freqFile, int nbThreadMax){
 		
 		// Allows the reading of the file 
 		ReduceFile stringBook = new ReduceFile(freqFile, nbThreadMax);

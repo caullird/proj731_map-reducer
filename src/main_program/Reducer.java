@@ -80,7 +80,7 @@ public class Reducer {
 		unSortedMap.entrySet()
 		    .stream()
 		    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) 
-		    .forEachOrdered( -> reverseSortedMap.put(x.getKey(), x.getValue()));
+		    .forEachOrdered(element -> reverseSortedMap.put(element.getKey(), element.getValue()));
 		
 		new ReduceFile().writeResult(reverseSortedMap.toString());
 	}
@@ -138,6 +138,6 @@ public class Reducer {
 	
 	public int getNbReceived() { return nbReceived; }
 
-	public void setNbReceived(int NbReceived) { this.nbReceived = nbReceived; }
+	public void setNbReceived(int nbReceived) { this.nbReceived = nbReceived; }
 	
 }

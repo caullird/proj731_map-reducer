@@ -8,6 +8,13 @@ public class MapReduceMain {
 		 *  Main function of the program
 		 */
 		
-		new Analyze();
+		// Allows the user to choose the file to be processed
+		String freqFile = "big.txt";
+		
+		
+		// Allows the user to choose the maximum number of threads
+		int nbThreadMax = 7;
+		
+		new Analyze(freqFile, nbThreadMax);
 	}
 }
