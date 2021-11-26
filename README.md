@@ -28,11 +28,11 @@ Ajouter le texte que vous souhaitez utiliser dans le fichier :  **data/initial_d
 Dans la classe **MapReduceFile.java** modifier : 
 
 ```java
-    // Modifier le nom de votre fichier
-		String freqFile = "yourFile.txt";
-		
-		// Choisisez le nombre de thread maximum pour votre programme
-		int nbThreadMax = 7;
+// Modifier le nom de votre fichier
+String freqFile = "yourFile.txt";
+
+// Choisisez le nombre de thread maximum pour votre programme
+int nbThreadMax = 7;
 ```
 
 Démarrez votre programme, est voici le résultat ! 
