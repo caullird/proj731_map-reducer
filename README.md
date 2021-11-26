@@ -3,27 +3,41 @@
 
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)  [![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
 
-This program allows to pass a text file in parameter, and to analyze the repetition of the number of words by using the multithread
 
-## Milestones of the project  
-1. To allow the reading of a long program quickly
-2. Analyzes the text to give an optimal number of multithreads
-3. Implement multithreading to create maps in parallel
-4. Manage the reception and the waiting to have the right number at the reception
-5. Generate new threads to do a map reduce
+L'objectif du projet et de permettre de passer un fichier en paramètre, et d'analyse la récurrence des mots dans le programme.
+Le principe de création de map et de reducer se base sur le concept du multithreading. 
+
+## Objectif du projet
+1. Lire le fichier et permettre une récupération rapide des données
+2. Analyser le texe pour donner un nombre optimal de multithreads
+3. Implémenter les multithread pour générer des maps en parralèle 
+4. Génrer la réception et l'attente de la récéption des threads 
+5. Générer des threads pour le map reduce
 
 
-## How to install the program?
-
-Clone the repo:
+## Comment installer le programme ?
 
 ```sh
 git clone git@github.com:caullird/proj731_map-reducer.git
 ```
 
-## How to use the program?
+## Comment utiliser le programme ? 
 
+Ajouter le texte que vous souhaitez utiliser dans le fichier :  **data/initial_data** 
 
+Dans la classe **MapReduceFile.java** modifier : 
+
+```java
+    // Modifier le nom de votre fichier
+		String freqFile = "yourFile.txt";
+		
+		// Choisisez le nombre de thread maximum pour votre programme
+		int nbThreadMax = 7;
+```
+
+Démarrez votre programme, est voici le résultat ! 
+
+##  Fait avec
 
 * [Java](https://www.java.com/fr/)
 * [Eclipse](https://www.eclipse.org/) - Java IDE
@@ -34,7 +48,7 @@ git clone git@github.com:caullird/proj731_map-reducer.git
 **Latest release** 1.0
 
 
-## Authors
+## Autheurs
 
 * **CAULLIREAU Dorian** _alias_ [@caullird](https://github.com/caullird)
 * **PERROLLAZ Maverick** _alias_ [@M4verickFr](https://github.com/M4verickFr)
